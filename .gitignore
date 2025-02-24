@@ -1,0 +1,84 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+
+# Poetry virtual environment
+.poetry/
+poetry.lock
+pyproject.toml
+
+# VS Code settings
+.vscode/
+
+# PyCharm settings
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Data files
+*.csv
+*.tsv
+*.json
+*.xlsx
+*.xls
+*.db
+*.sqlite
+*.h5
+*.parquet
+*.feather
+*.pkl
+*.joblib
+*.npy
+*.npz
+
+# Logs
+logs/
+*.log
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# pytest cache
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# Coverage reports
+htmlcov/
+*.cover
+*.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.lcov
+
+# Sphinx documentation
+_build/
+
+# Jupyter Notebook metadata
+*.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Docker
+.dockerignore
+
+# MacOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
