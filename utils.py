@@ -1,16 +1,35 @@
 import pandas as pd
 import numpy as np
+import yaml
 
-def calculate_missing_values_percentage(df):
+def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string=None):
     """
-    Calculate the percentage of missing values for each feature in the dataset
+    Calculate the percentage of missing values for features grouped by categories
+    defined in a YAML file.
     
     Parameters:
     df (pandas.DataFrame): The input dataframe
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
     
     Returns:
     pandas.DataFrame: DataFrame with feature names and their missing value percentages
     """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract feature categories (excluding 'other')
+    feature_categories = {}
+    for category in ['sensitive', 'covariate', 'treatment', 'target']:
+        if category in yaml_data['dataset']:
+            feature_categories[category.capitalize()] = yaml_data['dataset'][category]['features']
+    
     # Total number of rows
     total_rows = len(df)
     
@@ -27,31 +46,18 @@ def calculate_missing_values_percentage(df):
         'Missing_Percentage': missing_percentages.values
     }).sort_values('Missing_Percentage', ascending=False)
     
-    # Group features by their categories
-    feature_categories = {
-        'Sensitive': ['sex', 'race', 'age', 'age_cat'],
-        'Covariate': ['dob', 'juv_fel_count', 'juv_misd_count', 'juv_other_count', 
-                     'priors_count', 'priors_count.1', 'name', 'c_offense_date',
-                     'r_offense_date', 'vr_offense_date', 'days_b_screening_arrest',
-                     'c_days_from_compas'],
-        'Treatment': ['decile_score', 'decile_score.1', 'v_decile_score', 'score_text',
-                     'v_score_text', 'type_of_assessment', 'v_type_of_assessment',
-                     'c_charge_degree', 'c_charge_desc', 'r_charge_degree', 'r_charge_desc',
-                     'vr_charge_degree', 'vr_charge_desc'],
-        'Target': ['is_recid', 'two_year_recid']
-    }
-    
     # Create a new column for feature category
     def get_category(feature):
         for category, features in feature_categories.items():
             if feature in features:
                 return category
-        return 'Other'
+        return 'Uncategorized'
     
     missing_stats['Category'] = missing_stats['Feature'].apply(get_category)
     
-    # Filter out 'Other' category features that aren't in our specified categories
-    missing_stats = missing_stats[missing_stats['Category'] != 'Other']
+    # Filter out 'Uncategorized' category features if requested
+    # By default, include only the categorized features
+    missing_stats = missing_stats[missing_stats['Category'] != 'Uncategorized']
     
     # Reorder columns to put Category first
     missing_stats = missing_stats[['Category', 'Feature', 'Missing_Count', 'Missing_Percentage']]
