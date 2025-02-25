@@ -1,54 +1,64 @@
 dataset:
   name: compas-scores-raw
+  n_samples:
 
-  sensitive:
-    num: 2
-    features:
-      - Sex_Code_Text
-      - Ethnic_Code_Text
+  structural:
+    numerical:
+      num:
+      features:
+    categorical:
+      num:
+      features:
 
-  sensitive_proxy:
-    num: 3
-    features:
-      - LastName
-      - FirstName
-      - MiddleName
+  fairness:
+    sensitive:
+      num: 2
+      features:
+        - Sex_Code_Text
+        - Ethnic_Code_Text
 
-  covariate:
-    num: 5
-    features:
-      - DateOfBirth
-      - Language
-      - LegalStatus
-      - MaritalStatus
-      - RecSupervisionLevel
+    sensitive_proxy:
+      num: 3
+      features:
+        - LastName
+        - FirstName
+        - MiddleName
 
-  treatment:
-    num: 7
-    features:
-      - DecileScore
-      - ScoreText
-      - RawScore
-      - ScaleSet
-      - AssessmentType
-      - RecSupervisionLevelText
-      - CustodyStatus
+    covariate:
+      num: 5
+      features:
+        - DateOfBirth
+        - Language
+        - LegalStatus
+        - MaritalStatus
+        - RecSupervisionLevel
 
-  target:
-    num: 0
-    features: []
+    treatment:
+      num: 7
+      features:
+        - DecileScore
+        - ScoreText
+        - RawScore
+        - ScaleSet
+        - AssessmentType
+        - RecSupervisionLevelText
+        - CustodyStatus
 
-  other:
-    num: 13
-    features:
-      - Person_ID
-      - AssessmentID
-      - Case_ID
-      - Agency_Text
-      - ScaleSet_ID
-      - Scale_ID
-      - DisplayText
-      - IsCompleted
-      - IsDeleted
-      - AssessmentReason
-      - Screening_Date
+    target:
+      num: 0
+      features: []
+
+    other:
+      num: 13
+      features:
+        - Person_ID
+        - AssessmentID
+        - Case_ID
+        - Agency_Text
+        - ScaleSet_ID
+        - Scale_ID
+        - DisplayText
+        - IsCompleted
+        - IsDeleted
+        - AssessmentReason
+        - Screening_Date
