@@ -24,11 +24,15 @@ def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string
     else:
         raise ValueError("Either yaml_path or yaml_string must be provided")
     
-    # Extract feature categories (excluding 'other')
+    # Extract feature categories from the new structure
     feature_categories = {}
-    for category in ['sensitive', 'covariate', 'treatment', 'target']:
-        if category in yaml_data['dataset']:
-            feature_categories[category.capitalize()] = yaml_data['dataset'][category]['features']
+    
+    # Handle the new nested structure with fairness category
+    if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
+        fairness_data = yaml_data['dataset']['fairness']
+        for category in ['sensitive', 'covariate', 'treatment', 'target']:
+            if category in fairness_data and 'features' in fairness_data[category]:
+                feature_categories[category.capitalize()] = fairness_data[category]['features']
     
     # Total number of rows
     total_rows = len(df)
