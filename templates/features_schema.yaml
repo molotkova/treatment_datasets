@@ -1,4 +1,3 @@
-# Yamale schema for dataset structure
 dataset:
   name: str()
   n_samples: int()
@@ -6,28 +5,35 @@ dataset:
   structural:
     numerical:
       num: int()
-      features: list(str())
+      features:
+        - str()
     categorical:
       num: int()
-      features: list(str())
+      features:
+        - str()
 
   fairness:
     sensitive:
       num: int()
-      features: list(str())
-
+      features:
+        - str()
+    
     covariate:
       num: int()
-      features: list(str())
-
+      features:
+        - str()
+    
     treatment:
       num: int()
-      features: list(str())
+      features:
+        - str()
 
     target:
       num: int()
-      features: list(str())
+      features:
+        - str()
 
     other:
       num: int()
-      features: list(str(), required=False)
+      features:
+        - str()
