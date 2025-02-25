@@ -1,0 +1,144 @@
+dataset:
+  name: "Home Insurance Dataset"
+  n_samples: int()
+
+  structural:
+    numerical:
+      num: 28
+      features:
+        - SUM_INSURED_BUILDINGS
+        - SUM_INSURED_CONTENTS
+        - SPEC_SUM_INSURED
+        - SPEC_ITEM_PREM
+        - UNSPEC_HRP_PREM
+        - LAST_ANN_PREM_GROSS
+        - MTA_APRP
+        - MTA_FAP
+        - MTA_DATE
+        - MAX_DAYS_UNOCC
+        - BEDROOMS
+        - YEARBUILT
+        - PAYING_GUESTS
+        - NCD_GRANTED_YEARS_B
+        - NCD_GRANTED_YEARS_C
+        - RISK_RATED_AREA_B
+        - RISK_RATED_AREA_C
+        - MTA_FLAG
+        - MTA_APRP
+        - SEC_DISC_REQ
+        - APPR_ALARM
+        - APPR_LOCKS
+        - NEIGH_WATCH
+        - SAFE_INSTALLED
+        - SUBSIDENCE
+        - FLOODING
+        - SUM_INSURED_BUILDINGS
+        - SUM_INSURED_CONTENTS
+    
+    categorical:
+      num: 38
+      features:
+        - QUOTE_DATE
+        - COVER_START
+        - P1_EMP_STATUS
+        - P1_PT_EMP_STATUS
+        - POL_STATUS
+        - P1_MAR_STATUS
+        - P1_SEX
+        - PAYMENT_METHOD
+        - PAYMENT_FREQUENCY
+        - ROOF_CONSTRUCTION
+        - WALL_CONSTRUCTION
+        - LISTED
+        - OCC_STATUS
+        - OWNERSHIP_TYPE
+        - PROP_TYPE
+        - CAMPAIGN_DESC
+        - LEGAL_ADDON_PRE_REN
+        - LEGAL_ADDON_POST_REN
+        - HOME_EM_ADDON_PRE_REN
+        - HOME_EM_ADDON_POST_REN
+        - GARDEN_ADDON_PRE_REN
+        - GARDEN_ADDON_POST_REN
+        - KEYCARE_ADDON_PRE_REN
+        - KEYCARE_ADDON_POST_REN
+        - HP1_ADDON_PRE_REN
+        - HP1_ADDON_POST_REN
+        - HP2_ADDON_PRE_REN
+        - HP2_ADDON_POST_REN
+        - P1_POLICY_REFUSED
+        - BUS_USE
+        - CLERICAL
+        - BUILDINGS_COVER
+        - CONTENTS_COVER
+        - SPEC_ITEM_PREM
+        - POLICE
+        - LEGAL_ADDON_PRE_REN
+        - LEGAL_ADDON_POST_REN
+
+  fairness:
+    sensitive:
+      num: 4
+      features:
+        - P1_SEX
+        - P1_MAR_STATUS
+        - P1_EMP_STATUS
+        - P1_POLICY_REFUSED
+    
+    covariate:
+      num: 15
+      features:
+        - P1_DOB
+        - ROOF_CONSTRUCTION
+        - WALL_CONSTRUCTION
+        - FLOODING
+        - LISTED
+        - MAX_DAYS_UNOCC
+        - OCC_STATUS
+        - OWNERSHIP_TYPE
+        - PROP_TYPE
+        - BEDROOMS
+        - PAYING_GUESTS
+        - NCD_GRANTED_YEARS_B
+        - NCD_GRANTED_YEARS_C
+        - RISK_RATED_AREA_B
+        - RISK_RATED_AREA_C
+    
+    treatment:
+      num: 20
+      features:
+        - CAMPAIGN_DESC
+        - LEGAL_ADDON_PRE_REN
+        - LEGAL_ADDON_POST_REN
+        - HOME_EM_ADDON_PRE_REN
+        - HOME_EM_ADDON_POST_REN
+        - GARDEN_ADDON_PRE_REN
+        - GARDEN_ADDON_POST_REN
+        - KEYCARE_ADDON_PRE_REN
+        - KEYCARE_ADDON_POST_REN
+        - HP1_ADDON_PRE_REN
+        - HP1_ADDON_POST_REN
+        - HP2_ADDON_PRE_REN
+        - HP2_ADDON_POST_REN
+        - SEC_DISC_REQ
+        - MTA_FLAG
+        - MTA_DATE
+        - MTA_APRP
+        - PAYMENT_METHOD
+        - PAYMENT_FREQUENCY
+        - POLICE
+
+    target:
+      num: 1
+      features:
+        - POL_STATUS
+
+    other:
+      num: 6
+      features:
+        - MTA_DATE
+        - MTA_APRP
+        - NEIGH_WATCH
+        - SAFE_INSTALLED
+        - SUBSIDENCE
+        - BUS_USE
