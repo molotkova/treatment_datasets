@@ -51,8 +51,6 @@ dataset:
         - PAYMENT_METHOD
         - PAYMENT_FREQUENCY
 
-
-    
     treatment:
       num: 13
       features:
@@ -69,8 +67,6 @@ dataset:
         - MTA_DATE
         - CAMPAIGN_DESC
         - POL_STATUS  # is also in target
-
-        
 
     target:
       num: 3
