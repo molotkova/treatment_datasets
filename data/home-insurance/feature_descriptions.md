@@ -1,0 +1,71 @@
+# home-insurance
+
+This dataset contains information about home insurance policies, including customer details, property characteristics, risk factors, claims history, and policy adjustments.
+
+## Features
+
+- `QUOTE_DATE`: The specific date when the insurance quote was provided to the customer.
+- `COVER_START`: The start date of the insurance policy, indicating when coverage begins.
+- `POL_STATUS`: The current status of the insurance policy, such as active, canceled, lapsed, or pending.
+- `Police`: A unique identification number assigned to each insurance policy for tracking and reference.
+- `CLAIM3YEARS`: A binary or categorical variable indicating whether the client has filed any claims in the past three years.
+- `RISK_RATED_AREA_B`: A risk classification code based on geographical location for buildings.
+- `RISK_RATED_AREA_C`: A risk classification code based on geographical location for personal property.
+- `SUBSIDENCE`: Indicates whether the property has a history or risk of subsidence, which is a critical risk factor for insurers.
+- `FLOODING`: A binary or categorical variable indicating whether the property is in a flood-prone area.
+- `LISTED`: Indicates whether the property is classified as a heritage building, which may impact repair costs and insurance terms.
+- `P1_EMP_STATUS`: The employment status of the primary policyholder.
+- `P1_PT_EMP_STATUS`: Indicates whether the policyholder works part-time.
+- `P1_DOB`: The date of birth of the client, used for age-based risk assessment.
+- `P1_MAR_STATUS`: The marital status of the client.
+- `P1_POLICY_REFUSED`: A binary indicator of whether the policyholder has ever had an insurance application denied.
+- `P1_SEX`: The gender of the policyholder.
+- `PROP_TYPE`: The type of property being insured.
+- `BEDROOMS`: The number of bedrooms in the property.
+- `YEARBUILT`: The year the property was constructed.
+- `ROOF_CONSTRUCTION`: A categorical code representing the type of roof material used.
+- `WALL_CONSTRUCTION`: A categorical code for the wall material type.
+- `OWNERSHIP_TYPE`: Specifies whether the property is owner-occupied, rented, or under another ownership arrangement.
+- `OCC_STATUS`: The occupancy status of the property.
+- `MAX_DAYS_UNOCC`: The maximum number of days the property is expected to be unoccupied annually.
+- `PAYING_GUESTS`: Indicates whether the property hosts paying guests.
+- `BUILDINGS_COVER`: A binary indicator of whether the insurance policy includes coverage for the physical structure of the property.
+- `SUM_INSURED_BUILDINGS`: The total amount insured for the building structure.
+- `NCD_GRANTED_YEARS_B`: The number of years the policyholder has received a no-claims discount for building insurance.
+- `CONTENTS_COVER`: A binary indicator of whether the insurance policy includes coverage for personal belongings within the property.
+- `SUM_INSURED_CONTENTS`: The total insured amount for personal belongings.
+- `NCD_GRANTED_YEARS_C`: The number of years the policyholder has received a no-claims discount for personal property insurance.
+- `AD_BUILDINGS`: Indicates whether additional building coverage is included.
+- `AD_CONTENTS`: Indicates whether additional coverage is included for personal belongings.
+- `SPEC_SUM_INSURED`: The insured amount for high-value personal property.
+- `SPEC_ITEM_PREM`: The additional premium charged for insuring valuable personal items.
+- `UNSPEC_HRP_PREM`: An undefined premium category that may relate to unspecified household-related protection.
+- `APPR_ALARM`: Indicates whether an approved security alarm system is installed in the property.
+- `APPR_LOCKS`: Indicates whether the property has appropriate security locks installed.
+- `SAFE_INSTALLED`: Indicates whether a secure safe is installed in the home for storing valuables.
+- `NEIGH_WATCH`: Indicates whether the property is located in an area with an active neighborhood watch program.
+- `SEC_DISC_REQ`: Specifies whether the customer is eligible for a premium reduction due to security measures.
+- `BUS_USE`: A binary indicator of whether the property is used for business or commercial purposes.
+- `CLERICAL`: Indicates whether the property is used for administrative or clerical work.
+- `PAYMENT_METHOD`: The method chosen by the policyholder to pay for the insurance.
+- `PAYMENT_FREQUENCY`: Specifies whether the policyholder pays monthly, quarterly, or annually.
+- `LAST_ANN_PREM_GROSS`: The total premium paid by the policyholder for the previous year.
+- `MTA_FLAG`: Indicates whether a Mid-Term Adjustment (MTA) has been made to the policy.
+- `MTA_FAP`: Represents a bonus or adjustment applied to the premium due to an MTA.
+- `MTA_APRP`: The adjusted premium amount following a Mid-Term Adjustment.
+- `MTA_DATE`: The date on which the Mid-Term Adjustment was applied.
+- `LEGAL_ADDON_PRE_REN`: Indicates whether legal coverage was added to the policy before the first renewal.
+- `LEGAL_ADDON_POST_REN`: Indicates whether legal coverage was added after the first renewal.
+- `HOME_EM_ADDON_PRE_REN`: Specifies whether an emergency home repair add-on was included before the first renewal.
+- `HOME_EM_ADDON_POST_REN`: Specifies whether emergency home repair coverage was added after the first renewal.
+- `GARDEN_ADDON_PRE_REN`: Indicates whether garden-related coverage was included before the first renewal.
+- `GARDEN_ADDON_POST_REN`: Indicates whether garden-related coverage was added after the first renewal.
+- `KEYCARE_ADDON_PRE_REN`: Indicates whether key replacement coverage was included before the first renewal.
+- `KEYCARE_ADDON_POST_REN`: Indicates whether key replacement coverage was added after the first renewal.
+- `HP1_ADDON_PRE_REN`: Indicates whether optional add-on HP1 was included before the first renewal.
+- `HP1_ADDON_POST_REN`: Indicates whether optional add-on HP1 was included after the first renewal.
+- `HP2_ADDON_PRE_REN`: Indicates whether optional add-on HP2 was included before the first renewal.
+- `HP2_ADDON_POST_REN`: Indicates whether optional add-on HP2 was included after the first renewal.
+- `HP3_ADDON_PRE_REN`: Indicates whether optional add-on HP3 was included before the first renewal.
+- `HP3_ADDON_POST_REN`: Indicates whether optional add-on HP3 was included after the first renewal.
+- `CAMPAIGN_DESC`: A description of the marketing campaign through which the policyholder was acquired.

@@ -4,141 +4,109 @@ dataset:
 
   structural:
     numerical:
-      num: 28
+      num:
       features:
-        - SUM_INSURED_BUILDINGS
-        - SUM_INSURED_CONTENTS
-        - SPEC_SUM_INSURED
-        - SPEC_ITEM_PREM
-        - UNSPEC_HRP_PREM
-        - LAST_ANN_PREM_GROSS
-        - MTA_APRP
-        - MTA_FAP
-        - MTA_DATE
-        - MAX_DAYS_UNOCC
-        - BEDROOMS
-        - YEARBUILT
-        - PAYING_GUESTS
-        - NCD_GRANTED_YEARS_B
-        - NCD_GRANTED_YEARS_C
-        - RISK_RATED_AREA_B
-        - RISK_RATED_AREA_C
-        - MTA_FLAG
-        - MTA_APRP
-        - SEC_DISC_REQ
-        - APPR_ALARM
-        - APPR_LOCKS
-        - NEIGH_WATCH
-        - SAFE_INSTALLED
-        - SUBSIDENCE
-        - FLOODING
-        - SUM_INSURED_BUILDINGS
-        - SUM_INSURED_CONTENTS
+        # TODO
     
     categorical:
-      num: 38
+      num:
       features:
-        - QUOTE_DATE
-        - COVER_START
-        - P1_EMP_STATUS
-        - P1_PT_EMP_STATUS
-        - POL_STATUS
-        - P1_MAR_STATUS
-        - P1_SEX
-        - PAYMENT_METHOD
-        - PAYMENT_FREQUENCY
-        - ROOF_CONSTRUCTION
-        - WALL_CONSTRUCTION
-        - LISTED
-        - OCC_STATUS
-        - OWNERSHIP_TYPE
-        - PROP_TYPE
-        - CAMPAIGN_DESC
-        - LEGAL_ADDON_PRE_REN
-        - LEGAL_ADDON_POST_REN
-        - HOME_EM_ADDON_PRE_REN
-        - HOME_EM_ADDON_POST_REN
-        - GARDEN_ADDON_PRE_REN
-        - GARDEN_ADDON_POST_REN
-        - KEYCARE_ADDON_PRE_REN
-        - KEYCARE_ADDON_POST_REN
-        - HP1_ADDON_PRE_REN
-        - HP1_ADDON_POST_REN
-        - HP2_ADDON_PRE_REN
-        - HP2_ADDON_POST_REN
-        - P1_POLICY_REFUSED
-        - BUS_USE
-        - CLERICAL
-        - BUILDINGS_COVER
-        - CONTENTS_COVER
-        - SPEC_ITEM_PREM
-        - POLICE
-        - LEGAL_ADDON_PRE_REN
-        - LEGAL_ADDON_POST_REN
+        # TODO
 
   fairness:
     sensitive:
       num: 4
       features:
-        - P1_SEX
         - P1_MAR_STATUS
-        - P1_EMP_STATUS
         - P1_POLICY_REFUSED
+        - P1_SEX
     
     covariate:
-      num: 15
+      num: 26
       features:
-        - P1_DOB
-        - ROOF_CONSTRUCTION
-        - WALL_CONSTRUCTION
+        - CLAIM3YEARS  # is also in target
+        - RISK_RATED_AREA_B  # could be viewed as treatment?
+        - RISK_RATED_AREA_C
+        - SUBSIDENCE
         - FLOODING
         - LISTED
-        - MAX_DAYS_UNOCC
-        - OCC_STATUS
-        - OWNERSHIP_TYPE
+        - P1_EMP_STATUS
+        - P1_PT_EMP_STATUS
+        - P1_DOB
         - PROP_TYPE
         - BEDROOMS
-        - PAYING_GUESTS
-        - NCD_GRANTED_YEARS_B
-        - NCD_GRANTED_YEARS_C
-        - RISK_RATED_AREA_B
-        - RISK_RATED_AREA_C
+        - YEARBUILT
+        - ROOF_CONSTRUCTION
+        - WALL_CONSTRUCTION
+        - OWNERSHIP_TYPE
+        - OCC_STATUS
+        - MAX_DAYS_UNOCC
+        - PAYING_GUESTS   
+        - APPR_ALARM
+        - APPR_LOCKS
+        - SAFE_INSTALLED
+        - NEIGH_WATCH
+        - BUS_USE
+        - CLERICAL
+        - PAYMENT_METHOD
+        - PAYMENT_FREQUENCY
+
+
     
     treatment:
-      num: 20
+      num: 13
       features:
+        - QUOTE_DATE  # not sure if can be viewed as treatment
+        - COVER_START
+        - NCD_GRANTED_YEARS_B  # not sure if treatment, might be a covariate
+        - NCD_GRANTED_YEARS_C  # not sure if treatment, might be a covariate
+        - SPEC_ITEM_PREM
+        - UNSPEC_HRP_PREM
+        - LAST_ANN_PREM_GROSS
+        - MTA_FLAG  # is also in target
+        - MTA_FAP
+        - MTA_APRP
+        - MTA_DATE
         - CAMPAIGN_DESC
+        - POL_STATUS  # is also in target
+
+        
+
+    target:
+      num: 3
+      features:
+        - POL_STATUS
+        - MTA_FLAG
+        - CLAIM3YEARS
+
+    other:
+      num: 22
+      features:
+        - Police
+        - CONTENTS_COVER
+        - SUM_INSURED_CONTENTS
+        - BUILDINGS_COVER
+        - SUM_INSURED_BUILDINGS
+        - AD_BUILDINGS
+        - AD_CONTENTS
+        - SPEC_SUM_INSURED
+        - SEC_DISC_REQ
+        # features below could be covariates if they were decided by the insurance holder
         - LEGAL_ADDON_PRE_REN
         - LEGAL_ADDON_POST_REN
         - HOME_EM_ADDON_PRE_REN
-        - HOME_EM_ADDON_POST_REN
         - GARDEN_ADDON_PRE_REN
         - GARDEN_ADDON_POST_REN
         - KEYCARE_ADDON_PRE_REN
         - KEYCARE_ADDON_POST_REN
         - HP1_ADDON_PRE_REN
-        - HP1_ADDON_POST_REN
         - HP2_ADDON_PRE_REN
+        - HP3_ADDON_PRE_REN
+        - HP1_ADDON_POST_REN
         - HP2_ADDON_POST_REN
-        - SEC_DISC_REQ
-        - MTA_FLAG
-        - MTA_DATE
-        - MTA_APRP
-        - PAYMENT_METHOD
-        - PAYMENT_FREQUENCY
-        - POLICE
+        - HP3_ADDON_POST_REN
 
-    target:
-      num: 1
-      features:
-        - POL_STATUS
 
-    other:
-      num: 6
-      features:
-        - MTA_DATE
-        - MTA_APRP
-        - NEIGH_WATCH
-        - SAFE_INSTALLED
-        - SUBSIDENCE
-        - BUS_USE
+        
+
+        
