@@ -2,6 +2,18 @@ import pandas as pd
 import numpy as np
 import yaml
 
+def display_dataframe_info(df):
+    # Print the shape of the DataFrame
+    print(f"DataFrame shape: {df.shape} (rows, columns)")
+    
+    # Print a separator line
+    print("-" * 50)
+    
+    # Print the first five rows
+    print("First 5 rows of the DataFrame:")
+    display(df.head())
+
+
 def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string=None):
     """
     Calculate the percentage of missing values for features grouped by categories
