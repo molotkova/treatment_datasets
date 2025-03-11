@@ -1,0 +1,85 @@
+dataset: 
+  name: Diabetes
+  n_samples: 101766
+
+  structural:
+    numerical: 
+      num: 
+      features: 
+    categorical: 
+      num: 
+      features:
+
+  fairness: 
+    sensitive: 
+      num: 3
+      features: 
+        - race
+        - gender
+        - age   
+
+    covariate: 
+      num: 9
+      features: 
+        - admission_source_id
+        - discharge_disposition_id
+        - payer_code
+        - number_emergency
+        - number_outpatient
+        - number_inpatient
+        - weight # (? for ~98000 of 101000 samples)
+        # laboratory values
+        - max_glu_serum
+        - A1Cresult
+        - metformin
+      
+    treatment: 
+      num: 34
+      features: 
+        - admission_type_id
+        - time_in_hospital 
+        - medical_specialty
+        - num_lab_procedures
+        - num_procedures
+        - num_medications
+        - diag_1
+        - diag_2
+        - diag_3
+        - number_diagnoses
+        # prescriptions
+        - repaglinide
+        - nateglinide
+        - chlorpropamide
+        - glimepiride
+        - acetohexamide
+        - glipizide
+        - glyburide
+        - tolbutamide
+        - pioglitazone
+        - rosiglitazone
+        - acarbose
+        - miglitol
+        - troglitazone
+        - tolazamide
+        - examide
+        - citoglipton
+        - insulin
+        - glyburide-metformin
+        - glipizide-metformin
+        - glimepiride-pioglitazone
+        - metformin-rosiglitazone
+        - metformin-pioglitazone
+        - change
+        - diabetesMed
+
+    target: 
+      num: 1
+      features: 
+        - readmitted
+
+    other: 
+      num: 2
+      features:
+        - encounter_id
+        - patient_nbr
+       
