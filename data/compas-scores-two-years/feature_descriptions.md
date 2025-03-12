@@ -29,7 +29,7 @@ This dataset contains general recidivism data. It tracks whether an individual r
 - `c_days_from_compas`: The number of days between the COMPAS screening date and the individual's current offense date.
 - `c_charge_degree`: The degree of the charge for the current offense (e.g., M for misdemeanor, F for felony).
 - `c_charge_desc`: A textual description of the current charge (e.g., Grand Theft, Drug Possession).
-- `is_recid`: A binary indicator (`1 = Yes`, `0 = No`) of whether the individual reoffended within two years.
+- `is_recid`: A binary indicator (`1 = Yes`, `0 = No`) of whether the individual reoffended at all (not necessarily within two years).
 - `r_case_number`: The case number associated with the individual's recidivism charge (if applicable).
 - `r_charge_degree`: The degree of the charge for the recidivism offense (e.g., M for misdemeanor, F for felony).
 - `r_days_from_arrest`: The number of days between the individual's previous arrest and their recidivism offense (if applicable).
@@ -55,5 +55,5 @@ This dataset contains general recidivism data. It tracks whether an individual r
 - `out_custody`: The date when the individual was released from custody.
 - `start`: The start date of the observation period for the individual's recidivism tracking.
 - `end`: The end date of the observation period for tracking recidivism.
-- `event`: A categorical indicator related to the individual's case progression (e.g., arrest, sentencing).
+- `event`: Whether the individual reoffended (`1 = Yes`, `0 = No`) dutring the observation period (from `start` to `end`).
 - `two_year_recid`: A binary indicator (`1 = Yes`, `0 = No`) of whether the individual reoffended within two years.
