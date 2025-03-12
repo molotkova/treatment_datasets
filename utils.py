@@ -2,6 +2,27 @@ import pandas as pd
 import numpy as np
 import yaml
 
+def get_features_type_info(df):
+    # Create empty lists to store information
+    column_names = []
+    data_types = []
+    unique_counts = []
+    
+    # Iterate through each column
+    for column in df.columns:
+        column_names.append(column)
+        data_types.append(str(df[column].dtype))
+        unique_counts.append(df[column].nunique())
+    
+    # Create a DataFrame with the analysis
+    analysis_df = pd.DataFrame({
+        'feature': column_names,
+        'data_type': data_types,
+        'nunique_values': unique_counts
+    })
+    
+    return analysis_df
+
 def display_dataframe_info(df):
     # Print the shape of the DataFrame
     print(f"DataFrame shape: {df.shape} (rows, columns)")
@@ -42,7 +63,7 @@ def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string
     # Handle the new nested structure with fairness category
     if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
         fairness_data = yaml_data['dataset']['fairness']
-        for category in ['sensitive', 'covariate', 'treatment', 'target']:
+        for category in ['sensitive', 'covariate', 'treatment', 'target', 'other']:
             if category in fairness_data and 'features' in fairness_data[category]:
                 feature_categories[category.capitalize()] = fairness_data[category]['features']
     
