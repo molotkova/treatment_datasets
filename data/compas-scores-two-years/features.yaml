@@ -4,11 +4,64 @@ dataset:
 
   structural:
     numerical:
-      num:
+      num: 33
       features:
+        - juv_misd_count
+        - juv_other_count
+        - id
+        - name
+        - first
+        - last
+        - compas_screening_date
+        - dob
+        - age
+        - juv_fel_count
+        - priors_count
+        - days_b_screening_arrest
+        - c_jail_in
+        - c_jail_out
+        - c_case_number
+        - c_offense_date
+        - c_arrest_date
+        - c_days_from_compas
+        - c_charge_desc
+        - r_case_number
+        - r_days_from_arrest
+        - r_offense_date
+        - r_charge_desc
+        - r_jail_in
+        - r_jail_out
+        - vr_case_number
+        - vr_offense_date
+        - vr_charge_desc
+        - screening_date
+        - v_screening_date
+        - in_custody
+        - out_custody
+        - priors_count.1
+        - start
+        - end
     categorical:
-      num:
+      num: 20
       features:
+        - sex
+        - age_cat
+        - race
+        - decile_score
+        - c_charge_degree
+        - is_recid
+        - r_charge_degree
+        - violent_recid
+        - is_violent_recid
+        - vr_charge_degree
+        - type_of_assessment
+        - decile_score.1
+        - score_text
+        - v_type_of_assessment
+        - v_decile_score
+        - v_score_text
+        - event
+        - two_year_recid
 
   fairness:
     sensitive:
@@ -20,7 +73,7 @@ dataset:
         - age_cat
 
     covariate:
-      num: 12
+      num: 11
       features:
         - dob
         - juv_fel_count
@@ -28,7 +81,6 @@ dataset:
         - juv_other_count
         - priors_count
         - priors_count.1
-        - name
         - c_offense_date
         - r_offense_date
         - vr_offense_date
@@ -36,7 +88,7 @@ dataset:
         - c_days_from_compas
 
     treatment:
-      num: 13
+      num: 20
       features:
         - decile_score
         - decile_score.1
@@ -60,7 +112,7 @@ dataset:
         - out_custody
 
     target:
-      num: 2
+      num: 4
       features:
         - is_recid
         - two_year_recid
@@ -68,11 +120,12 @@ dataset:
         - is_violent_recid
 
     other:
-      num: 29
+      num: 14
       features:
         - id
         - first
         - last
+        - name
         - compas_screening_date
         - c_case_number
         - c_arrest_date
