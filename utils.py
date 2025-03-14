@@ -70,7 +70,8 @@ def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string
     # Total number of rows
     total_rows = len(df)
     
-    # Calculate missing values count for each column
+    # Calculate missing values count for each column 
+    df.replace('?', pd.NA, inplace=True)
     missing_counts = df.isnull().sum()
     
     # Calculate percentage of missing values
