@@ -70,3 +70,63 @@ def calculate_nan_percentage_of_grouped_features(df, yaml_path=None, yaml_string
     missing_stats = missing_stats.sort_values(['Category', 'Missing_Percentage'], ascending=[True, False])
     
     return missing_stats
+
+
+def get_numerical_features(yaml_path=None, yaml_string=None):
+    """
+    Get numerical features from a YAML file.
+    
+    Parameters:
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
+    
+    Returns:
+    list: List of numerical feature names
+    """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract numerical features from the new structure
+    numerical_features = []
+    if 'dataset' in yaml_data and 'structural' in yaml_data['dataset']:
+        structural_data = yaml_data['dataset']['structural']
+        if 'numerical' in structural_data and 'features' in structural_data['numerical']:
+            numerical_features = structural_data['numerical']['features']
+    
+    return numerical_features
+
+
+def get_categorical_features(yaml_path=None, yaml_string=None):
+    """
+    Get categorical features from a YAML file.
+    
+    Parameters:
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
+    
+    Returns:
+    list: List of categorical feature names
+    """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract categorical features from the new structure
+    categorical_features = []
+    if 'dataset' in yaml_data and 'structural' in yaml_data['dataset']:
+        structural_data = yaml_data['dataset']['structural']
+        if 'categorical' in structural_data and 'features' in structural_data['categorical']:
+            categorical_features = structural_data['categorical']['features']
+    
+    return categorical_features
