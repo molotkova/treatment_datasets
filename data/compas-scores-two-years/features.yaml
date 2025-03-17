@@ -73,7 +73,7 @@ dataset:
         - age_cat
 
     covariate:
-      num: 11
+      num: 10
       features:
         - dob
         - juv_fel_count
@@ -84,12 +84,12 @@ dataset:
         - c_offense_date
         - r_offense_date
         - vr_offense_date
-        - days_b_screening_arrest
         - c_days_from_compas
 
     treatment:
       num: 20
       features:
+        - days_b_screening_arrest
         - decile_score
         - decile_score.1
         - v_decile_score
