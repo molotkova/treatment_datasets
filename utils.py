@@ -2,6 +2,65 @@ import pandas as pd
 import numpy as np
 import yaml
 
+def group_and_rename_columns(df, column_dict):
+    """
+    Groups and renames DataFrame columns according to their category.
+    
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The input DataFrame to be processed
+    column_dict : dict
+        Dictionary with category names as keys and lists of column names as values.
+        Expected keys: 'sensitive', 'covariate', 'treatment', 'target'
+    
+    Returns:
+    --------
+    pandas.DataFrame
+        New DataFrame with reordered and renamed columns
+    
+    Example:
+    --------
+    column_dict = {
+        'sensitive': ['gender', 'race'],
+        'covariate': ['age', 'education', 'income'],
+        'treatment': ['intervention'],
+        'target': ['outcome']
+    }
+    new_df = group_and_rename_columns(df, column_dict)
+    """
+
+    # Create a new empty DataFrame
+    new_df = pd.DataFrame()
+    
+    # Dictionary to map category prefixes
+    prefix_map = {
+        'sensitive': 's',
+        'covariate': 'x',
+        'treatment': 'z',
+        'target': 'y'
+    }
+    
+    # Process each category
+    for category, columns in column_dict.items():
+        if category not in prefix_map:
+            raise ValueError(f"Unknown category: {category}. Expected categories: {list(prefix_map.keys())}")
+        
+        # Check if all columns exist in the original DataFrame
+        missing_cols = [col for col in columns if col not in df.columns]
+        if missing_cols:
+            raise ValueError(f"Columns {missing_cols} not found in DataFrame")
+        
+        # Get the prefix for this category
+        prefix = prefix_map[category]
+        
+        # Add columns to the new DataFrame with renamed columns
+        for i, col_name in enumerate(columns, 1):
+            new_col_name = f"{prefix}{i}"
+            new_df[new_col_name] = df[col_name]
+    
+    return new_df
+
 def get_features_type_info(df):
     # Create empty lists to store information
     column_names = []
