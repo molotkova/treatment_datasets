@@ -4,11 +4,62 @@ dataset:
 
   structural:
     numerical: 
-      num: 
+      num: 11
       features: 
+        - number_emergency
+        - number_outpatient
+        - number_inpatient
+        - weight
+        - time_in_hospital 
+        - num_lab_procedures
+        - num_procedures
+        - num_medications
+        - number_diagnoses
+        - encounter_id
+        - patient_nbr
+        
     categorical: 
-      num: 
+      num: 39
       features:
+        - race
+        - gender
+        - age 
+        - admission_source_id
+        - discharge_disposition_id  
+        - payer_code
+        - max_glu_serum
+        - A1Cresult
+        - metformin
+        - admission_type_id
+        - medical_specialty
+        - diag_1
+        - diag_2
+        - diag_3
+        - repaglinide
+        - nateglinide
+        - chlorpropamide
+        - glimepiride
+        - acetohexamide
+        - glipizide
+        - glyburide
+        - tolbutamide
+        - pioglitazone
+        - rosiglitazone
+        - acarbose
+        - miglitol
+        - troglitazone
+        - tolazamide
+        - examide
+        - citoglipton
+        - insulin
+        - glyburide-metformin
+        - glipizide-metformin
+        - glimepiride-pioglitazone
+        - metformin-rosiglitazone
+        - metformin-pioglitazone
+        - change
+        - diabetesMed
+        - readmitted
 
   fairness: 
     sensitive: 
@@ -19,7 +70,7 @@ dataset:
         - age   
 
     covariate: 
-      num: 9
+      num: 10
       features: 
         - admission_source_id
         - discharge_disposition_id
@@ -27,7 +78,7 @@ dataset:
         - number_emergency
         - number_outpatient
         - number_inpatient
-        - weight # (? for ~98000 of 101000 samples)
+        - weight 
         # laboratory values
         - max_glu_serum
         - A1Cresult
@@ -37,8 +88,8 @@ dataset:
       num: 34
       features: 
         - admission_type_id
-        - time_in_hospital 
         - medical_specialty
+        - time_in_hospital 
         - num_lab_procedures
         - num_procedures
         - num_medications
