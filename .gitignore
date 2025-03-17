@@ -22,7 +22,6 @@ pyproject.toml
 .ipynb_checkpoints/
 
 # Data files
-*.csv
 *.tsv
 *.json
 *.xlsx
