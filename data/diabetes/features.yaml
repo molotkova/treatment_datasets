@@ -70,7 +70,7 @@ dataset:
         - age   
 
     covariate: 
-      num: 10
+      num: 7
       features: 
         - admission_source_id
         - discharge_disposition_id
@@ -79,13 +79,10 @@ dataset:
         - number_outpatient
         - number_inpatient
         - weight 
-        # laboratory values
-        - max_glu_serum
-        - A1Cresult
-        - metformin
+        
       
     treatment: 
-      num: 34
+      num: 37
       features: 
         - admission_type_id
         - medical_specialty
@@ -97,6 +94,10 @@ dataset:
         - diag_2
         - diag_3
         - number_diagnoses
+        # laboratory values
+        - max_glu_serum
+        - A1Cresult
+        - metformin
         # prescriptions
         - repaglinide
         - nateglinide

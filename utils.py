@@ -328,10 +328,10 @@ def order_columns(df, yaml_path=None, yaml_string=None):
     ordered_features = []
     if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
         fairness_data = yaml_data['dataset']['fairness']
-        if 'covariate' in fairness_data and 'features' in fairness_data['covariate']:    
-            ordered_features += [feature for feature in fairness_data['covariate']['features'] if feature in df.columns]
         if 'sensitive' in fairness_data and 'features' in fairness_data['sensitive']: 
             ordered_features += [feature for feature in fairness_data['sensitive']['features'] if feature in df.columns]
+        if 'covariate' in fairness_data and 'features' in fairness_data['covariate']:    
+            ordered_features += [feature for feature in fairness_data['covariate']['features'] if feature in df.columns]
         if 'treatment' in fairness_data and 'features' in fairness_data['treatment']:
             ordered_features += [feature for feature in fairness_data['treatment']['features'] if feature in df.columns]
         if 'target' in fairness_data and 'features' in fairness_data['target']:    
