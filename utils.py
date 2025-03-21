@@ -2,64 +2,147 @@ import pandas as pd
 import numpy as np
 import yaml
 
-def group_and_rename_columns(df, column_dict):
+
+def create_yaml_structure(df, fairness_dict, structural_dict):
     """
-    Groups and renames DataFrame columns according to their category.
+    Creates a YAML-compatible dictionary structure for a dataset with fairness and structural information,
+    using feature indexes instead of names. Features not in the provided dictionaries are ignored with warnings.
     
     Parameters:
     -----------
     df : pandas.DataFrame
-        The input DataFrame to be processed
-    column_dict : dict
-        Dictionary with category names as keys and lists of column names as values.
-        Expected keys: 'sensitive', 'covariate', 'treatment', 'target'
+        The dataframe containing the dataset
+    fairness_dict : dict
+        Dictionary with keys 'sensitive', 'covariate', 'treatment', 'target' 
+        and lists of feature names as values
+    structural_dict : dict
+        Dictionary with keys 'categorical', 'numerical' and lists of feature names as values
+    
+    Returns:
+    --------
+    dict
+        A nested dictionary structure suitable for YAML export, with feature indexes
+    """
+    # Create a mapping from feature names to their column indexes
+    feature_to_index = {name: idx for idx, name in enumerate(df.columns)}
+    
+    # Collect feature names in each taxonomy
+    fairness_features = set()
+    for features_list in fairness_dict.values():
+        fairness_features.update(features_list)
+    
+    structural_features = set()
+    for features_list in structural_dict.values():
+        structural_features.update(features_list)
+    
+    # Identify features excluded from each taxonomy
+    features_excluded_from_fairness = [feat for feat in df.columns if feat not in fairness_features]
+    features_excluded_from_structural = [feat for feat in df.columns if feat not in structural_features]
+    
+    # Identify features not in either taxonomy
+    features_completely_ignored = [feat for feat in df.columns if feat not in fairness_features and feat not in structural_features]
+    
+    # Print appropriate warnings
+    if features_excluded_from_structural and not all(f in fairness_features for f in features_excluded_from_structural):
+        print(f"Warning: The following features of dataframe are not in the dictionary and will be excluded from structural taxonomy in YAML: {features_excluded_from_structural}")
+    
+    if features_excluded_from_fairness and not all(f in structural_features for f in features_excluded_from_fairness):
+        print(f"Warning: The following features of dataframe are not in the dictionary and will be excluded from fairness taxonomy in YAML: {features_excluded_from_fairness}")
+    
+    if features_completely_ignored:
+        print(f"Warning: The following features of dataframe are not in any of the dictionaries and will be completely ignored in YAML: {features_completely_ignored}")
+    
+    # Initialize the YAML structure
+    yaml_structure = {
+        "dataset": {
+            "name": "compas-scores-two-years",  # This could be parameterized
+            "n_samples": len(df),
+            "structural": {
+                "numerical": {
+                    "num": 0,
+                    "features": []
+                },
+                "categorical": {
+                    "num": 0,
+                    "features": []
+                }
+            },
+            "fairness": {
+                "sensitive": {
+                    "num": 0,
+                    "features": []
+                },
+                "covariate": {
+                    "num": 0,
+                    "features": []
+                },
+                "treatment": {
+                    "num": 0,
+                    "features": []
+                },
+                "target": {
+                    "num": 0,
+                    "features": []
+                }
+            }
+        }
+    }
+    
+    # Fill the structural section with indices
+    for structure_type, features in structural_dict.items():
+        # Filter to only include features that exist in the dataframe and convert to indices
+        valid_indices = [feature_to_index[feat] for feat in features if feat in df.columns]
+        yaml_structure["dataset"]["structural"][structure_type]["features"] = valid_indices
+        yaml_structure["dataset"]["structural"][structure_type]["num"] = len(valid_indices)
+    
+    # Fill the fairness section with indices
+    for fairness_type, features in fairness_dict.items():
+        # Filter to only include features that exist in the dataframe and convert to indices
+        valid_features = [feat for feat in features if feat in df.columns]
+        valid_indices = [feature_to_index[feat] for feat in valid_features]
+        yaml_structure["dataset"]["fairness"][fairness_type]["features"] = valid_indices
+        yaml_structure["dataset"]["fairness"][fairness_type]["num"] = len(valid_indices)
+    
+    return yaml_structure
+
+
+def reorder_columns_by_dict(df, feature_dict):
+    """
+    Reorders the columns of a dataframe based on the order of values in a dictionary.
+    Columns not found in the dictionary will be ignored.
+    
+    Parameters:
+    -----------
+    df : pandas.DataFrame
+        The dataframe to reorder
+    feature_dict : dict
+        Dictionary where values are lists of column names
     
     Returns:
     --------
     pandas.DataFrame
-        New DataFrame with reordered and renamed columns
-    
-    Example:
-    --------
-    column_dict = {
-        'sensitive': ['gender', 'race'],
-        'covariate': ['age', 'education', 'income'],
-        'treatment': ['intervention'],
-        'target': ['outcome']
-    }
-    new_df = group_and_rename_columns(df, column_dict)
+        Dataframe with columns reordered according to the feature_dict
     """
-
-    # Create a new empty DataFrame
-    new_df = pd.DataFrame()
+    # Flatten the dictionary values into a single ordered list
+    ordered_columns = []
+    for category in feature_dict.values():
+        ordered_columns.extend(category)
     
-    # Dictionary to map category prefixes
-    prefix_map = {
-        'sensitive': 's',
-        'covariate': 'x',
-        'treatment': 'z',
-        'target': 'y'
-    }
+    # Check if all columns in ordered_columns exist in df
+    missing_columns = [col for col in ordered_columns if col not in df.columns]
+    if missing_columns:
+        raise ValueError(f"Columns not found in dataframe: {missing_columns}")
     
-    # Process each category
-    for category, columns in column_dict.items():
-        if category not in prefix_map:
-            raise ValueError(f"Unknown category: {category}. Expected categories: {list(prefix_map.keys())}")
-        
-        # Check if all columns exist in the original DataFrame
-        missing_cols = [col for col in columns if col not in df.columns]
-        if missing_cols:
-            raise ValueError(f"Columns {missing_cols} not found in DataFrame")
-        
-        # Get the prefix for this category
-        prefix = prefix_map[category]
-        
-        # Add columns to the new DataFrame with renamed columns
-        for i, col_name in enumerate(columns, 1):
-            new_col_name = f"{prefix}{i}"
-            new_df[new_col_name] = df[col_name]
+    # Identify columns in df that are not in ordered_columns
+    extra_columns = [col for col in df.columns if col not in ordered_columns]
+    if extra_columns:
+        print(f"Warning: The following columns of dataframe were not in the dictionary and will be ignored: {extra_columns}")
     
-    return new_df
+    # Return the dataframe with only the columns that are in the dictionary, in the specified order
+    # Filter out columns that don't exist in the dataframe
+    valid_columns = [col for col in ordered_columns if col in df.columns]
+    
+    return df[valid_columns]
 
 def get_features_type_info(df):
     # Create empty lists to store information

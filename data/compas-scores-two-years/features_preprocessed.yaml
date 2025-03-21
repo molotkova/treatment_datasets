@@ -1,0 +1,23 @@
+dataset:
+  name: compas-scores-two-years
+  n_samples: 6164
+  structural:
+    numerical:
+      num: 5
+      features: [4, 5, 6, 7, 10]
+    categorical:
+      num: 6
+      features: [8, 0, 9, 1, 2, 3]
+  fairness:
+    sensitive:
+      num: 4
+      features: [0, 1, 2, 3]
+    covariate:
+      num: 4
+      features: [4, 5, 6, 7]
+    treatment:
+      num: 3
+      features: [8, 9, 10]
+    target:
+      num: 2
+      features: [11, 12]
