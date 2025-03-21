@@ -313,6 +313,64 @@ def get_categorical_features(df, yaml_path=None, yaml_string=None):
     
     return categorical_features
 
+def get_sensitive_features(yaml_path=None, yaml_string=None):
+    """
+    Get sensitive features from a YAML file.
+    
+    Parameters:
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
+    
+    Returns:
+    list: List of sensitive feature names
+    """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract sensitive features from the new structure
+    sensitive_features = []
+    if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
+        fairness_data = yaml_data['dataset']['fairness']
+        if 'sensitive' in fairness_data and 'features' in fairness_data['sensitive']:
+            sensitive_features = fairness_data['sensitive']['features']
+    
+    return sensitive_features
+
+def get_covariate_features(yaml_path=None, yaml_string=None):
+    """
+    Get covariate features from a YAML file.
+    
+    Parameters:
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
+    
+    Returns:
+    list: List of covariate feature names
+    """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract covariate features from the new structure
+    covariate_features = []
+    if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
+        fairness_data = yaml_data['dataset']['fairness']
+        if 'covariate' in fairness_data and 'features' in fairness_data['covariate']:
+            covariate_features = fairness_data['covariate']['features']
+    
+    return covariate_features
+
 def get_treatment_features(yaml_path=None, yaml_string=None):
     """
     Get treatment features from a YAML file.
@@ -342,10 +400,40 @@ def get_treatment_features(yaml_path=None, yaml_string=None):
     
     return treatment_features
 
+def get_target_features(yaml_path=None, yaml_string=None):
+    """
+    Get target features from a YAML file.
+    
+    Parameters:
+    yaml_path (str, optional): Path to the YAML file with feature definitions
+    yaml_string (str, optional): String containing YAML content
+    
+    Returns:
+    list: List of target feature names
+    """
+    # Load feature categories from YAML
+    if yaml_path:
+        with open(yaml_path, 'r') as file:
+            yaml_data = yaml.safe_load(file)
+    elif yaml_string:
+        yaml_data = yaml.safe_load(yaml_string)
+    else:
+        raise ValueError("Either yaml_path or yaml_string must be provided")
+    
+    # Extract target features from the new structure
+    target_features = []
+    if 'dataset' in yaml_data and 'fairness' in yaml_data['dataset']:
+        fairness_data = yaml_data['dataset']['fairness']
+        if 'target' in fairness_data and 'features' in fairness_data['target']:
+            target_features = fairness_data['target']['features']
+    
+    return target_features
+
 
 def map_icd9_category(code):
     """
     Maps an ICD-9 diagnosis code to a broader category.
+    For more information on ICD-9 codes, see: https://en.wikipedia.org/wiki/List_of_ICD-9_codes
     """
     if pd.isna(code) or code == "?":
         return "Unknown"
