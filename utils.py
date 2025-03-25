@@ -3,7 +3,7 @@ import numpy as np
 import yaml
 
 
-def create_yaml_structure(df, fairness_dict, structural_dict):
+def create_yaml_structure(df, fairness_dict, structural_dict, name):
     """
     Creates a YAML-compatible dictionary structure for a dataset with fairness and structural information,
     using feature indexes instead of names. Features not in the provided dictionaries are ignored with warnings.
@@ -55,7 +55,7 @@ def create_yaml_structure(df, fairness_dict, structural_dict):
     # Initialize the YAML structure
     yaml_structure = {
         "dataset": {
-            "name": "compas-scores-two-years",  # This could be parameterized
+            "name": name,  
             "n_samples": len(df),
             "structural": {
                 "numerical": {
