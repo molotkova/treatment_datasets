@@ -1,237 +1,32 @@
-dataset: 
-  name: MIMIC-III-sepsis
+dataset:
+  name: mimic-III-sepsis
   n_samples: 4559
-
   structural:
-    numerical: 
+    numerical:
       num: 63
-      features: 
-        - age
-        - heartrate_min  
-        - heartrate_max  
-        - heartrate_mean  
-        - sysbp_min
-        - sysbp_max  
-        - sysbp_mean  
-        - diasbp_min  
-        - diasbp_max 
-        - diasbp_mean  
-        - meanbp_min 
-        - meanbp_max 
-        - meanbp_mean 
-        - resprate_min  
-        - resprate_max 
-        - resprate_mean 
-        - tempc_min 
-        - tempc_max 
-        - tempc_mean  
-        - spo2_min 
-        - spo2_max 
-        - spo2_mean  
-        - aniongap_min  
-        - aniongap_max
-        - creatinine_min 
-        - creatinine_max 
-        - chloride_min 
-        - chloride_max  
-        - hematocrit_min 
-        - hematocrit_max 
-        - hemoglobin_min 
-        - hemoglobin_max 
-        - lactate_min  
-        - lactate_max  
-        - lactate_mean  
-        - platelet_min  
-        - platelet_max  
-        - potassium_min 
-        - potassium_max 
-        - inr_min  
-        - inr_max 
-        - sodium_min 
-        - sodium_max 
-        - bun_min  
-        - bun_max  
-        - bun_mean  
-        - wbc_min  
-        - wbc_max  
-        - wbc_mean 
-        - glucose_min  
-        - glucose_max 
-        - glucose_mean  
-        - bicarbonate_min  
-        - bicarbonate_max  
-        - urineoutput 
-        - sofa
-        - lods  
-        - sirs  
-        - qsofa 
-        - suspected_infection_time_poe_days 
-        - elixhauser_hospital 
-        - icu_los
-        - hosp_los  
-    categorical: 
+      features: [0, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+        23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+        42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+        61, 62, 63, 75, 80, 99, 100]
+    categorical:
       num: 38
-      features:
-        - is_male
-        - race_white 
-        - race_black
-        - race_hispanic
-        - race_other
-        - qsofa_sysbp_score 
-        - qsofa_gcs_score  
-        - qsofa_resprate_score  
-        - sepsis_angus  
-        - sepsis_martin  
-        - sepsis_explicit
-        - septic_shock_explicit  
-        - severe_sepsis_explicit  
-        - sepsis_nqf  
-        - sepsis_cdc  
-        - sepsis_cdc_simple
-        - positiveculture_poe
-        - blood_culture_positive  
-        - metastatic_cancer
-        - diabetes
-        - src_blood_culture 
-        - src_mrsa_screen 
-        - src_urine
-        - src_swab  
-        - src_others 
-        - fs_med
-        - fs_cmed  
-        - fs_surg  
-        - fs_traum  
-        - fs_nsurg  
-        - fs_nmed  
-        - fs_ortho  
-        - fs_omed  
-        - fs_others  
-        - vent
-        - rrt
-        - hospital_expire_flag
-        - thirtyday_expire_flag
-
+      features: [1, 2, 3, 4, 5, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 76, 77,
+        78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97,
+        98]
   fairness:
-    sensitive: 
-      num: 6 
-      features: 
-        - age
-        - is_male
-        - race_white 
-        - race_black
-        - race_hispanic
-        - race_other
-
-    covariate: 
+    sensitive:
+      num: 6
+      features: [0, 1, 2, 3, 4, 5]
+    covariate:
       num: 89
-      features: 
-      # vital signs of the patients from the first 24 h of ICU stay
-        - heartrate_min  
-        - heartrate_max  
-        - heartrate_mean  
-        - sysbp_min
-        - sysbp_max  
-        - sysbp_mean  
-        - diasbp_min  
-        - diasbp_max 
-        - diasbp_mean  
-        - meanbp_min 
-        - meanbp_max 
-        - meanbp_mean 
-        - resprate_min  
-        - resprate_max 
-        - resprate_mean 
-        - tempc_min 
-        - tempc_max 
-        - tempc_mean  
-        - spo2_min 
-        - spo2_max 
-        - spo2_mean  
-        # laboratory values
-        - aniongap_min  
-        - aniongap_max
-        - creatinine_min 
-        - creatinine_max 
-        - chloride_min 
-        - chloride_max  
-        - hematocrit_min 
-        - hematocrit_max 
-        - hemoglobin_min 
-        - hemoglobin_max 
-        - lactate_min  
-        - lactate_max  
-        - lactate_mean  
-        - platelet_min  
-        - platelet_max  
-        - potassium_min 
-        - potassium_max 
-        - inr_min  
-        - inr_max 
-        - sodium_min 
-        - sodium_max 
-        - bun_min  
-        - bun_max  
-        - bun_mean  
-        - wbc_min  
-        - wbc_max  
-        - wbc_mean 
-        - glucose_min  
-        - glucose_max 
-        - glucose_mean  
-        - bicarbonate_min  
-        - bicarbonate_max  
-        - urineoutput 
-        # scores
-        - sofa
-        - lods  
-        - sirs  
-        - qsofa  
-        - qsofa_sysbp_score 
-        - qsofa_gcs_score  
-        - qsofa_resprate_score  
-        # sepsis
-        - sepsis_angus  
-        - sepsis_martin  
-        - sepsis_explicit
-        - septic_shock_explicit  
-        - severe_sepsis_explicit  
-        - sepsis_nqf  
-        - sepsis_cdc  
-        - sepsis_cdc_simple
-        # others
-        - suspected_infection_time_poe_days  
-        - positiveculture_poe
-        - blood_culture_positive  
-        - metastatic_cancer
-        - diabetes
-        - elixhauser_hospital  
-        - src_blood_culture 
-        - src_mrsa_screen 
-        - src_urine
-        - src_swab  
-        - src_others 
-        - fs_med
-        - fs_cmed  
-        - fs_surg  
-        - fs_traum  
-        - fs_nsurg  
-        - fs_nmed  
-        - fs_ortho  
-        - fs_omed  
-        - fs_others  
-
-    treatment: 
+      features: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+        24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42,
+        43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
+        62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+        81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94]
+    treatment:
       num: 2
-      features: 
-        - vent
-        - rrt
-
-    target: 
+      features: [95, 96]
+    target:
       num: 4
-      features: 
-        - hospital_expire_flag
-        - thirtyday_expire_flag
-        - icu_los
-        - hosp_los
-
-
+      features: [97, 98, 99, 100]
